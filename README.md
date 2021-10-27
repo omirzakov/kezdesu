@@ -1,6 +1,6 @@
-# Getting Started with Create React App
 
-KEZDESU
+
+# KEZDESU
 
 ## Available Scripts
 
@@ -11,5 +11,9 @@ KEZDESU
 Что сделать сборку проекта выполните команду:
 
 ### `yarn build`
+
+Что запустить приложение локально выполните команду:
+
+### `npm start или yarn start`
 
 
