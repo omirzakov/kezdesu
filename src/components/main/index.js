@@ -1,14 +1,16 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Row, Col } from "antd";
 import React, { useState } from "react";
 import "./main.css"
+import { navigatons } from "../data/navigations";
 
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
+    LogoutOutlined
 } from '@ant-design/icons';
+import { routers } from "../routes";
+import { Route } from "react-router";
+import { Link, Switch } from "react-router-dom";
 
 
   
@@ -24,25 +26,32 @@ const Main = () => {
 
     return (
         <Layout>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
+            <Sider trigger={null} collapsible collapsed={collapsed} width={300}>
                 <div style={{color:"white", padding:10}}>KEZDESU</div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{minHeight:"100vh"}}>
-                    <Menu.Item key="1" icon={<UserOutlined />} >
-                        nav 1
-                    </Menu.Item>
-                    <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                    nav 2
-                    </Menu.Item>
-                    <Menu.Item key="3" icon={<UploadOutlined />}>
-                    nav 3
-                    </Menu.Item>
+                    {
+                        navigatons?.map((nav, i) => (
+                            <Menu.Item key={i} icon={<nav.Icon />} >
+                                <Link to={nav.link}>
+                                { nav.name }
+                                </Link>
+                            </Menu.Item>
+                        ))
+                    }
                 </Menu>
             </Sider>
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
-                    {
-                        collapsed ? <MenuUnfoldOutlined className="trigger" onClick={toggle} /> : <MenuFoldOutlined className="trigger" onClick={toggle} />
-                    }
+                    <Row>
+                        <Col span={12}>
+                        { collapsed ? <MenuUnfoldOutlined className="trigger" onClick={toggle} /> 
+                                    : <MenuFoldOutlined className="trigger" onClick={toggle} /> }
+                        </Col>
+                        <Col span={12} style={{textAlign:"right"}}>
+                            <LogoutOutlined style={{marginRight:"20px", cursor:"pointer"}} width="30px"/>
+                        </Col>
+                    </Row>
+
                 </Header>
                 <Content
                         className="site-layout-background"
@@ -52,7 +61,17 @@ const Main = () => {
                         minHeight: 280,
                         }}
                     >
-                    Content
+                        <Switch>
+                            {
+                                routers.map((route, i) => (
+                                    <Route path={route.path} exact={route.exact} strict={route.strict} key={i}>
+                                        {
+                                            <route.Component />
+                                        }
+                                    </Route>
+                                ))
+                            }
+                        </Switch>
                 </Content>
             </Layout>
 
