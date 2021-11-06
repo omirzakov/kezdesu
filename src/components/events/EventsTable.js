@@ -6,23 +6,23 @@ import { Table, Tag, Space } from 'antd';
 
 const columns = [
     {
-      title: 'Имя',
+      title: 'Название',
       dataIndex: 'name',
       key: 'name',
       render: text => <a>{text}</a>,
     },
     {
-      title: 'Возраст',
+      title: 'Дата создания',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: 'Адрес',
+      title: 'Время оканчания',
       dataIndex: 'address',
       key: 'address',
     },
     {
-      title: 'Тэги',
+      title: 'Участвующие',
       key: 'tags',
       dataIndex: 'tags',
       render: tags => (
@@ -77,11 +77,11 @@ const columns = [
     },
   ];
 
-const BlackListTable = () => {
+const EventsTable = () => {
 
 
     return (
         <Table columns={columns} dataSource={data} />
     )
 }
-export default BlackListTable;
+export default EventsTable;

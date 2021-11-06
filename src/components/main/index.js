@@ -1,16 +1,12 @@
-import { Layout, Menu, Row, Col } from "antd";
+import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import "./main.css"
 import { navigatons } from "../data/navigations";
 
-import {
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    LogoutOutlined
-} from '@ant-design/icons';
 import { routers } from "../routes";
 import { Route } from "react-router";
 import { Link, Switch } from "react-router-dom";
+import MainHeader from "../header/header";
 
 
   
@@ -41,18 +37,7 @@ const Main = () => {
                 </Menu>
             </Sider>
             <Layout className="site-layout">
-                <Header className="site-layout-background" style={{ padding: 0 }}>
-                    <Row>
-                        <Col span={12}>
-                        { collapsed ? <MenuUnfoldOutlined className="trigger" onClick={toggle} /> 
-                                    : <MenuFoldOutlined className="trigger" onClick={toggle} /> }
-                        </Col>
-                        <Col span={12} style={{textAlign:"right"}}>
-                            <LogoutOutlined style={{marginRight:"20px", cursor:"pointer"}} width="30px"/>
-                        </Col>
-                    </Row>
-
-                </Header>
+                <MainHeader toggle={toggle} collapsed={collapsed} />
                 <Content
                         className="site-layout-background"
                         style={{
