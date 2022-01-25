@@ -3,7 +3,11 @@ import {
     UserOutlined,
     FireOutlined,
     DeleteOutlined,
-    SettingOutlined
+    SettingOutlined,
+    FolderOutlined,
+    SkinOutlined,
+    LineChartOutlined,
+    WechatOutlined
 } from '@ant-design/icons';
 
 
@@ -27,6 +31,26 @@ export const navigatons = [
         name: "Ивенты",
         link: "/events",
         Icon: FireOutlined
+    },
+    {
+        name: "Категории",
+        link: "/category",
+        Icon: FolderOutlined
+    },
+    {
+        name: "Роли",
+        link: "/role",
+        Icon: SkinOutlined
+    },
+    {
+        name: "Статистика",
+        link: "/statistics",
+        Icon: LineChartOutlined
+    },
+    {
+        name: "Чат",
+        link: "/chat",
+        Icon: WechatOutlined
     },
     {
         name: "Настройка",

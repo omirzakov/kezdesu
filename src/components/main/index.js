@@ -1,7 +1,7 @@
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import "./main.css"
-import { navigatons } from "../data/navigations";
+import { navigatons } from "../../data/navigations";
 
 import { routers } from "../routes";
 import { Route } from "react-router";
