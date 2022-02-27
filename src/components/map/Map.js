@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Typography } from "antd";
-import SimpleMap from "./GoogleMap";
+import YandexMap from "./YandexMap";
 
 const { Title } = Typography;
 
@@ -11,8 +11,7 @@ const Map = () => {
     return (
         <div>
             <Title level={2}>Карта</Title>
-
-            <SimpleMap />
+            <YandexMap />
         </div>
     )
 }

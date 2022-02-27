@@ -11,6 +11,7 @@ import {
 } from "antd";
 import "./login.less";
 import { MainContext } from "../context/MainContext";
+import { fetchAuthorize } from '@/api';
 
 const { Title } = Typography;
 
@@ -20,9 +21,10 @@ const Login = () => {
 
     const onFinish = (values) => {
         
-        if(values) {
-            setIsLogin(true);
-        }
+       const res = fetchAuthorize(values);
+        // if(values) {
+        //     setIsLogin(true);
+        // }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -47,22 +49,21 @@ const Login = () => {
             onFinishFailed={onFinishFailed}
             >
             <Form.Item
-                name="username"
-                rules={[{ required: true, message: "Please input your username!" }]}
+                name="email"
+                rules={[{ required: true, message: "Пожалуйста, введите свою почту" }]}
             >
-                <Input placeholder="Username" />
+                <Input placeholder="Почта" />
             </Form.Item>
             <Form.Item
                 name="password"
                 rules={[
                 {
                     required: true,
-                    message: "Please input your password!",
-                    min: 8,
+                    message: "Пожалуйста, введите свой пароль"
                 },
                 ]}
             >
-                <Input.Password placeholder="Password" />
+                <Input.Password placeholder="Пароль" />
             </Form.Item>
             <Form.Item style={{ textAlign: "center" }}>
                 <Button type="primary" htmlType="submit">
