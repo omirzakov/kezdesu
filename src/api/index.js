@@ -18,7 +18,7 @@ export const fetchAuthorize = async (body) => {
         redirect: 'follow'
     };
 
-    fetch("http://172.20.10.9:8082/admin/auth/login", requestOptions)
+    fetch("http://172.20.10.3:8082/admin/auth/login", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));

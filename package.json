@@ -12,6 +12,7 @@
     "antd": "^4.16.13",
     "axios": "^0.23.0",
     "google-map-react": "^2.1.10",
+    "http-proxy-middleware": "^2.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -24,7 +25,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "dev": "craco --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
