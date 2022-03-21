@@ -4,9 +4,11 @@ import { MainContext } from "./components/context/MainContext";
 import { useEffect, useState } from "react";
 import './App.css';
 import Main from "./components/main";
+import { useSelector } from "react-redux";
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
+    const { isAuth } = useSelector(state => state.user);
 
     useEffect(() => {
         const isAuth = JSON.parse(localStorage.getItem('auth'));
@@ -22,7 +24,7 @@ function App() {
             <Layout>
                 <MainContext.Provider value={{ isLogin, setIsLogin }}>
                     {
-                        isLogin ? <Main /> : <Login />
+                        isAuth ? <Main /> : <Login />
                     }
                 </MainContext.Provider>
             </Layout>

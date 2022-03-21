@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
     Form,
     Input,
@@ -14,6 +14,9 @@ import "./login.less";
 import { MainContext } from "../context/MainContext";
 import { fetchAuthorize } from '@/api';
 import video from '@/assets/present.mp4';
+import { useSelector } from 'react-redux';
+import { useAuthMutation } from "../../app/api/auth";
+import { toast, ToastContainer } from "react-toastify";
 
 const { Content } = Layout;
 
@@ -21,13 +24,20 @@ const { Title } = Typography;
 
 const Login = () => {
     const { setIsLogin } = useContext(MainContext);
-
+    const store = useSelector(state => state);
+    const [fetchAuth, { isError }] = useAuthMutation();
 
     const onFinish = (values) => {
 
-        // const res = fetchAuthorize(values);
-        setIsLogin(true)
+        fetchAuth(values);
+        // setIsLogin(true)
     };
+
+    useEffect(() => {
+        if(isError) {
+            toast.error('Произошла ошибка при авторизации');
+        }
+    }, [isError])
 
     const onFinishFailed = (errorInfo) => {
         const errorMesage = errorInfo?.errorFields
@@ -37,8 +47,6 @@ const Login = () => {
         message.error(errorMesage);
     };
 
-    console.log(video)
-
     return (
         <Row
             style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
@@ -47,7 +55,7 @@ const Login = () => {
                 <source src={video} type='video/mp4' />
             </video>
             <Col span={24} style={{ textAlign: "center" }}>
-                <Title level={1} style={{color: 'white'}}>Kezdesu</Title>
+                <Title level={1} style={{color: 'white'}}>KEZDESU</Title>
                 <Title level={2} style={{color: 'white'}}>Добро пожаловать в <br /> учётную запись администратора</Title>
             </Col>
             <Col span={6}>
@@ -60,8 +68,9 @@ const Login = () => {
                         <Form.Item
                             name="email"
                             rules={[{ required: true, message: "Пожалуйста, введите свою почту" }]}
+                            style={{width: '100%'}}
                         >
-                            <Input placeholder="Почта" />
+                            <Input placeholder="Почта" style={{ width: '100%'}} />
                         </Form.Item>
                         <Form.Item
                             name="password"
@@ -82,6 +91,7 @@ const Login = () => {
                     </Form>
                 </Content>
             </Col>
+            <ToastContainer />
         </Row>
     );
 };

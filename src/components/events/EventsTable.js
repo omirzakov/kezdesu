@@ -1,87 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table, Tag, Space } from 'antd';
+import moment from "moment";
+import EventEdit from "./EventEdit";
+import EventMap from "./EventMap";
 
 
-
-const columns = [
+const EventsTable = ({ events }) => {
+  const columns = [
     {
       title: 'Название',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'label',
+      key: 'label',
       render: text => <a>{text}</a>,
     },
     {
       title: 'Дата создания',
-      dataIndex: 'age',
-      key: 'age',
+      dataIndex: 'startedAt',
+      key: 'startedAt',
+      render: (text, record) => (
+        moment(text).format('DD.MM.YYYY - hh:mm')
+      )
     },
     {
       title: 'Время оканчания',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'endedAt',
+      key: 'endedAt',
+      render: (text, record) => (
+        moment(text).format('DD.MM.YYYY - hh:mm')
+      )
     },
     {
-      title: 'Участвующие',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: tags => (
-        <>
-          {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
+      title: 'Актуальный',
+      dataIndex: 'actual',
+      key: 'actual',
+      render: (actual, record) => (
+        actual ? 'Да' : 'Нет'
+      )
+    },
+    {
+      title: 'Местоположение',
+      key: 'action',
+      render: (text, record) => (
+        <EventMap longitude={record?.longitude} latitude={record?.latitude} label={record?.label} />
       ),
     },
     {
       title: 'Действие',
       key: 'action',
       render: (text, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
+        <EventEdit event={record} />
       ),
     },
   ];
-  
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
 
-const EventsTable = () => {
-
-
-    return (
-        <Table columns={columns} dataSource={data} />
-    )
+  return (
+    <>
+        <Table columns={columns} dataSource={events} onChange={(event) => console.log(event)} />
+    </>
+  )
 }
 export default EventsTable;

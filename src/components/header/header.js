@@ -7,10 +7,12 @@ import {
     UserOutlined
 } from '@ant-design/icons';
 import profileMenu from "./profilemenu";
+import { useSelector } from "react-redux";
 
 const { Header } = Layout;
 
 const MainHeader = ({toggle, collapsed}) => {
+    const { user } = useSelector(state => state.user);
 
 
     return (

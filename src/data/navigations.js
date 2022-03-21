@@ -7,7 +7,8 @@ import {
     FolderOutlined,
     SkinOutlined,
     LineChartOutlined,
-    WechatOutlined
+    WechatOutlined,
+    PictureOutlined
 } from '@ant-design/icons';
 
 
@@ -37,11 +38,11 @@ export const navigatons = [
         link: "/category",
         Icon: FolderOutlined
     },
-    {
-        name: "Роли",
-        link: "/role",
-        Icon: SkinOutlined
-    },
+    // {
+    //     name: "Роли",
+    //     link: "/role",
+    //     Icon: SkinOutlined
+    // },
     {
         name: "Статистика",
         link: "/statistics",
@@ -53,8 +54,13 @@ export const navigatons = [
         Icon: WechatOutlined
     },
     {
+        name: "Города",
+        link: "/cities",
+        Icon: PictureOutlined
+    },
+    {
         name: "Настройка",
         link: "/settings",
         Icon: SettingOutlined
-    }
+    },
 ]

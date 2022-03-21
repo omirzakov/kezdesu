@@ -7,6 +7,7 @@ import Statistics from "./statistics/index";
 import Roles from "./roles";
 import Category from "./category";
 import Chat from "./chat";
+import Cities from "./cities";
 
 export const routers = [
     {
@@ -62,5 +63,11 @@ export const routers = [
         exact: true,
         strict: true,
         Component: Chat
+    },
+    {
+        path: "/cities",
+        exact: true,
+        strict: true,
+        Component: Cities
     }
 ]

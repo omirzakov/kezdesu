@@ -4,17 +4,17 @@ import App from './App';
 import 'antd/dist/antd.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store/store';
+import store from './app/store';
 
 
 ReactDOM.render(
-  <Router>
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
-  </React.StrictMode>
-  </Router>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
