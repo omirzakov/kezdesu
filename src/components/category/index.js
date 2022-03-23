@@ -1,5 +1,6 @@
 import React from 'react';
 import UsersTable from '../users/UsersTable';
+import CategoryTable from './CategoryTable';
 
 
 const Category = () => {
@@ -8,8 +9,8 @@ const Category = () => {
 
         <>
 
-            <h1>Category</h1>
-            <UsersTable />
+            <h1>Категории</h1>
+            <CategoryTable />
         </>
     )
 }

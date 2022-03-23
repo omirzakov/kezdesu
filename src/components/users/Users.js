@@ -2,17 +2,19 @@ import React from "react";
 
 import { Typography } from "antd";
 import UsersTable from "./UsersTable";
+import { useGetUsersQuery } from "../../app/api/user";
 
 
 const { Title } = Typography;
 
 const Users = () => {
+    const { data } = useGetUsersQuery();
 
 
     return (
         <div>
             <Title level={2}>Пользователи</Title>
-            <UsersTable />
+            <UsersTable data={data} />
         </div>
     )
 }

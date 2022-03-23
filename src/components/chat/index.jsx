@@ -2,15 +2,23 @@ import React, { useState, useEffect } from 'react';
 
 const Chat = () => {
     const [bids, setBids] = useState([0]);
-    const ws = new WebSocket("wss://ws.bitstamp.net");
+    const ws = new WebSocket("ws://172.20.10.2:8082/listEvents");
 
-    const apiCall = {
-        event: "bts:subscribe",
-        data: { channel: "order_book_btcusd" },
+    ws.onopen = function () {
+        alert("Соединение установлено.");
     };
 
-    ws.onopen = (event) => {
-        ws.send(JSON.stringify(apiCall));
+    ws.onclose = function (event) {
+        if (event.wasClean) {
+            alert('Соединение закрыто чисто');
+        } else {
+            alert('Обрыв соединения'); // например, "убит" процесс сервера
+        }
+        alert('Код: ' + event.code + ' причина: ' + event.reason);
+    };
+
+    ws.onerror = function (error) {
+        alert("Ошибка " + error.message);
     };
 
     useEffect(() => {
@@ -37,7 +45,7 @@ const Chat = () => {
 
     return (
         <div>
-            { firstBids }
+            {firstBids}
         </div>
     )
 }

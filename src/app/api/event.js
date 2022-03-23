@@ -8,8 +8,22 @@ export const eventApi = api.injectEndpoints({
                     url: '/action/listEvent',
                 }
             }
+        }),
+        blockEvent: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/action/blockEvent',
+                }
+            }
+        }),
+        deleteEvent: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/action/deleteEvent',
+                }
+            }
         })
     })
 })
 
-export const { useGetEventQuery } = eventApi;
+export const { useGetEventQuery, useBlockEventMutation } = eventApi;
