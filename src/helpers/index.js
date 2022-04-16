@@ -1,0 +1,1 @@
+export const editedToasts = ['deleteCategory', 'editCategory', 'saveCategory', 'deleteCity', 'editCity', 'saveCity', 'createEvent', 'deleteEvent', 'blockEvent', 'blockUser']

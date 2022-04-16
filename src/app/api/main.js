@@ -1,5 +1,7 @@
 import { fetchBaseQuery, retry } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { toast } from 'react-toastify';
+import { editedToasts } from '../../helpers';
 
 const BASE_URL = 'http://65.108.149.23:8082/admin';
 
@@ -25,6 +27,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     if (result.error && result.error.status === 401) {
         localStorage.removeItem('auth');
         window.location.reload();
+    }
+
+    if(editedToasts.includes(api.endpoint)) {
+        toast.success('Изменение успешно произошло');
     }
     return result;
 };

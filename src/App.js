@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import './App.css';
 import Main from "./components/main";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
@@ -28,6 +30,7 @@ function App() {
                     }
                 </MainContext.Provider>
             </Layout>
+            <ToastContainer />
         </div>
     );
 }

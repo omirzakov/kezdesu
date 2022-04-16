@@ -4,7 +4,6 @@ import TextArea from 'antd/lib/input/TextArea';
 import { useBlockEventMutation } from '../../app/api/event';
 
 const EventEdit = ({ event, refetch }) => {
-    console.log(event)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [fetchBlockEvent, { isSuccess }] = useBlockEventMutation();
 
@@ -39,8 +38,6 @@ const EventEdit = ({ event, refetch }) => {
             refetch();
         }
     }, [isSuccess])
-
-    console.log(event)
 
     return (
         <>

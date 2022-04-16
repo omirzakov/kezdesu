@@ -1,12 +1,28 @@
 import React from "react";
 import { Button, Col, Form, Input, Row, Typography } from "antd";
+import { toast } from "react-toastify";
+import { useResetPasswordMutation } from "../../app/api/auth";
 
 const { Title } = Typography;
 
 const Settings = () => {
+    const [fetchChangePassword] = useResetPasswordMutation();
 
     const handleChange = (values) => {
-        console.log(values)
+        const { oldPassword, newPassword, repeatPassword } = values;
+
+        if(newPassword !== repeatPassword) {
+            toast.error('Новые пароли не сооветствуют');
+        }
+
+        if(oldPassword.length < 3) {
+            toast.error('Минимальная длина пароля 3');
+        }
+
+        fetchChangePassword({
+            oldPassword,
+            newPassword
+        })
     }
 
     return (
@@ -16,14 +32,14 @@ const Settings = () => {
                     <Row>
                         <Col xs={6}>
                             <Title level={4}>Изменить пароль</Title>
-                            <Form.Item name='old_password'>
-                                <Input placeholder="Старый пароль"  />
+                            <Form.Item name='oldPassword'>
+                                <Input type='password' placeholder="Старый пароль"  />
                             </Form.Item>
-                            <Form.Item name='new_password'>
-                                <Input placeholder="Новый пароль"  />
+                            <Form.Item name='newPassword'>
+                                <Input type='password' placeholder="Новый пароль"  />
                             </Form.Item>
-                            <Form.Item name='repeat_password'>
-                                <Input placeholder="Повторите"  />
+                            <Form.Item name='repeatPassword'>
+                                <Input type='password' placeholder="Повторите" />
                             </Form.Item>
                             <Form.Item>
                                 <Button shape="round" type="primary" htmlType="submit" placeholder="Повторите">Изменить пароль</Button>
