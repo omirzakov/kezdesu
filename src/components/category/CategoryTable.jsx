@@ -1,85 +1,53 @@
 import React from "react";
 
 import { Table, Tag, Space } from 'antd';
+import { useGetCategoryQuery } from "../../app/api/category";
+import FullLoader from "../../views/FullLoader";
+import CategoryCreate from "./CategoryCreate";
+import CategoryEdit from "./CategoryEdit";
 
-const columns = [
+
+const renderColumns = (refetch) => {
+
+  return [
+    {
+      title: 'Идентификатор категорий',
+      dataIndex: 'categoryId',
+      key: 'categoryId',
+    },
     {
       title: 'Название',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
+      dataIndex: 'label',
+      key: 'label',
     },
     {
-      title: 'Возраст',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Актуальный',
+      dataIndex: 'actual',
+      key: 'actual',
+      render: actual => <span>{actual ? "Да" : "Нет"}</span>,
     },
     {
-      title: 'Адрес',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Тэги',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: tags => (
-        <>
-          {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
-    },
-    {
-      title: 'Действие',
-      key: 'action',
-      render: (text, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
-      ),
+      title: 'Актуальный',
+      key: 'actual',
+      render: (text, record) => <CategoryEdit refetch={refetch} record={record} />,
     },
   ];
-  
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
+}
 
 const CategoryTable = () => {
+  const { data, isLoading, refetch } = useGetCategoryQuery();
 
 
-    return (
-        <Table columns={columns} dataSource={data} />
-    )
+  if (isLoading) {
+    return <FullLoader />
+  }
+
+
+  return (
+    <>
+      <CategoryCreate refetch={refetch} />
+      <Table columns={renderColumns(refetch)} dataSource={data?.detailResponses} />
+    </>
+  )
 }
 export default CategoryTable;

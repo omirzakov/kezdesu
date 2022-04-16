@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button, Form } from 'antd';
+import { Modal, Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { useBlockEventMutation } from '../../app/api/event';
+import { useCreateEventMutation } from '../../app/api/event';
+import { useSaveCategoryMutation } from '../../app/api/category';
 
-const EventEdit = ({ event, refetch }) => {
-    console.log(event)
+const CategoryCreate = ({ refetch }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [fetchBlockEvent, { isSuccess }] = useBlockEventMutation();
+    const [fetchSaveCategory, { isSuccess }] = useSaveCategoryMutation();
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -21,17 +21,12 @@ const EventEdit = ({ event, refetch }) => {
     };
 
     const onFinish = (values) => {
-        console.log(values)
-    }
-
-    const blockEvent = () => {
         const data = {
-            id: event?.eventId
+            categoryLabel: values?.label
         }
 
-        fetchBlockEvent(data);
+        fetchSaveCategory(data);
         setIsModalVisible(false);
-
     }
 
     useEffect(() => {
@@ -40,14 +35,12 @@ const EventEdit = ({ event, refetch }) => {
         }
     }, [isSuccess])
 
-    console.log(event)
-
     return (
         <>
-            <Button danger type="primary" onClick={showModal}>
-                Заблокировать
+            <Button type="primary" onClick={showModal}>
+                Создать
             </Button>
-            <Modal title={`Редактирование ивента №${event?.eventId}`} okText={''} footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title={`Создание ивента`} okText={'Создать'} footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <Form
                     name="basic"
                     layout='vertical'
@@ -56,19 +49,15 @@ const EventEdit = ({ event, refetch }) => {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Причина"
-                        name="reason"
+                        label="Заголовок"
+                        name="label"
                         rules={[{ required: true, message: 'Причина' }]}
                     >
-                        <TextArea />
+                        <Input />
                     </Form.Item>
-
                     <Form.Item>
-                        <Button danger type="primary" htmlType="submit" style={{ marginRight: '10px'}} onClick={blockEvent}>
-                            Заблокировать
-                        </Button>
-                        <Button danger type="primary" htmlType="submit">
-                            Удалить
+                        <Button type="primary" htmlType="submit">
+                            Создать
                         </Button>
                     </Form.Item>
                 </Form>
@@ -77,4 +66,4 @@ const EventEdit = ({ event, refetch }) => {
     );
 };
 
-export default EventEdit;
+export default CategoryCreate;

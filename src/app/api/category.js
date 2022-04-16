@@ -1,38 +1,38 @@
 import { api } from './main';
 
-export const cityApi = api.injectEndpoints({
+export const categoryApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getCity: builder.query({
+        getCategory: builder.query({
             query: (data) => {
                 return {
-                    url: '/action/list-city',
+                    url: '/action/list-category',
                 }
             }
         }),
-        deleteCity: builder.mutation({
+        deleteCategory: builder.mutation({
             query: (data) => {
                 console.log(data)
                 return {
-                    url: '/action/delete-city',
+                    url: '/action/delete-category',
                     method: 'POST',
                     body: data
                 }
             }
         }),
-        editCity: builder.mutation({
+        editCategory: builder.mutation({
             query: (data) => {
                 console.log(data)
                 return {
-                    url: '/action/edit-city',
+                    url: '/action/edit-category',
                     method: 'POST',
                     body: data
                 }
             }
         }),
-        saveCity: builder.mutation({
+        saveCategory: builder.mutation({
             query: (data) => {
                 return {
-                    url: '/action/save-city',
+                    url: '/action/save-category',
                     method: 'POST',
                     body: data
                 }
@@ -41,4 +41,4 @@ export const cityApi = api.injectEndpoints({
     })
 })
 
-export const { useGetCityQuery, useDeleteCityMutation, useEditCityMutation, useSaveCityMutation } = cityApi;
+export const { useGetCategoryQuery, useDeleteCategoryMutation, useSaveCategoryMutation, useEditCategoryMutation } = categoryApi;

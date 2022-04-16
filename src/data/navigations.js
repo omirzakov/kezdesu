@@ -48,11 +48,11 @@ export const navigatons = [
         link: "/statistics",
         Icon: LineChartOutlined
     },
-    {
-        name: "Чат",
-        link: "/chat",
-        Icon: WechatOutlined
-    },
+    // {
+    //     name: "Чат",
+    //     link: "/chat",
+    //     Icon: WechatOutlined
+    // },
     {
         name: "Города",
         link: "/cities",

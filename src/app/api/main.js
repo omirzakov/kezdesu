@@ -1,7 +1,7 @@
 import { fetchBaseQuery, retry } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = 'http://172.20.10.2:8082/admin';
+const BASE_URL = 'http://65.108.149.23:8082/admin';
 
 const baseQuery = retry(
     fetchBaseQuery({

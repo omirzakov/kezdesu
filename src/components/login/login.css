@@ -1,5 +1,5 @@
 .login-form {
-    min-height: 100vh;
+    min-height: 60vh;
     max-width: 750px;
 }
 
@@ -10,3 +10,9 @@
     min-width: 100%;
     min-height: 100%;
 }
+
+/* .header-content {
+    color: #000;
+    background: #fff;
+    padding: 10px;
+} */

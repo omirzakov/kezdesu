@@ -10,7 +10,7 @@ import {
     Layout,
     message,
 } from "antd";
-import "./login.less";
+import "./login.css";
 import { MainContext } from "../context/MainContext";
 import { fetchAuthorize } from '@/api';
 import video from '@/assets/present.mp4';
@@ -34,7 +34,7 @@ const Login = () => {
     };
 
     useEffect(() => {
-        if(isError) {
+        if (isError) {
             toast.error('Произошла ошибка при авторизации');
         }
     }, [isError])
@@ -55,8 +55,10 @@ const Login = () => {
                 <source src={video} type='video/mp4' />
             </video>
             <Col span={24} style={{ textAlign: "center" }}>
-                <Title level={1} style={{color: 'white'}}>KEZDESU</Title>
-                <Title level={2} style={{color: 'white'}}>Добро пожаловать в <br /> учётную запись администратора</Title>
+                <Content className="header-content">
+                    <Title level={1} style={{ color: 'white' }}>KEZDESU</Title>
+                    <Title level={2} style={{ color: 'white' }}>Добро пожаловать в <br /> учётную запись администратора</Title>
+                </Content>
             </Col>
             <Col span={6}>
                 <Content>
@@ -68,9 +70,9 @@ const Login = () => {
                         <Form.Item
                             name="email"
                             rules={[{ required: true, message: "Пожалуйста, введите свою почту" }]}
-                            style={{width: '100%'}}
+                            style={{ width: '100%' }}
                         >
-                            <Input placeholder="Почта" style={{ width: '100%'}} />
+                            <Input placeholder="Почта" style={{ width: '100%' }} />
                         </Form.Item>
                         <Form.Item
                             name="password"
@@ -84,7 +86,7 @@ const Login = () => {
                             <Input.Password placeholder="Пароль" />
                         </Form.Item>
                         <Form.Item style={{ textAlign: "center" }}>
-                            <Button type="primary" htmlType="submit" style={{ minWidth: '300px'}}>
+                            <Button type="primary" htmlType="submit" style={{ minWidth: '300px' }}>
                                 Войти
                             </Button>
                         </Form.Item>

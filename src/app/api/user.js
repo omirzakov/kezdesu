@@ -5,14 +5,14 @@ export const userApi = api.injectEndpoints({
         getUsers: builder.query({
             query: (data) => {
                 return {
-                    url: '/action/listClient',
+                    url: '/action/list-client',
                 }
             }
         }),
         getBlockUsers: builder.query({
             query: (data) => {
                 return {
-                    url: '/action/listClient?blocked=true',
+                    url: '/action/list-client?blocked=true',
                 }
             }
         }),
@@ -20,7 +20,7 @@ export const userApi = api.injectEndpoints({
             query: (data) => {
                 console.log(data)
                 return {
-                    url: '/action/blockClient',
+                    url: '/action/block-client',
                     method: 'POST',
                     body: data
                 }

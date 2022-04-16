@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form, Input } from 'antd';
 import { useDeleteCategoryMutation, useEditCategoryMutation } from '../../app/api/category';
-import { useDeleteCityMutation, useEditCityMutation } from '../../app/api/city';
 
-const CitiesEdit = ({ record, refetch }) => {
+const CategoryEdit = ({ record, refetch }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [fetchEditCity, { isSuccess: successEdit }] = useEditCityMutation();
-    const [fetchDeleteCity, { isSuccess }] = useDeleteCityMutation();
+    const [fetchEditCategory, { isSuccess: successEdit }] = useEditCategoryMutation();
+    const [fetchDeleteCategory, { isSuccess }] = useDeleteCategoryMutation();
 
 
     const showModal = () => {
@@ -22,19 +21,16 @@ const CitiesEdit = ({ record, refetch }) => {
     };
 
     const onFinish = (values) => {
-        console.log(values)
         const data = {
-            cityLabel: values?.label,
-            cityId: record?.cityId,
-            latitude: values?.latitude,
-            longitude: values?.longitude
+            categoryLabel: values?.label,
+            categoryId: values?.categoryId
         }
-        fetchEditCity(data);
+        fetchEditCategory(data);
         setIsModalVisible(false);
     }
 
     const onDelete = () => {
-        fetchDeleteCity({ id: record?.cityId });
+        fetchDeleteCategory({ id: record?.categoryId });
         setIsModalVisible(false);
     }
 
@@ -49,7 +45,7 @@ const CitiesEdit = ({ record, refetch }) => {
             <Button type="primary" onClick={showModal}>
                 Редактировать
             </Button>
-            <Modal title={`Редактирование города`} okText={'Создать'} footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title={`Создание ивента`} okText={'Создать'} footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <Form
                     name="basic"
                     layout='vertical'
@@ -65,15 +61,8 @@ const CitiesEdit = ({ record, refetch }) => {
                         <Input value={record?.categoryLabel} />
                     </Form.Item>
                     <Form.Item
-                        label="Широта города"
-                        name="latitude"
-                        rules={[{ required: true, message: 'Причина' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Долгота города"
-                        name="longitude"
+                        label="Идентификатор категорий"
+                        name="categoryId"
                         rules={[{ required: true, message: 'Причина' }]}
                     >
                         <Input />
@@ -96,4 +85,4 @@ const CitiesEdit = ({ record, refetch }) => {
     );
 };
 
-export default CitiesEdit;
+export default CategoryEdit;

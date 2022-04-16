@@ -6,7 +6,7 @@ import EventEdit from "./EventEdit";
 import EventMap from "./EventMap";
 
 
-const EventsTable = ({ events }) => {
+const EventsTable = ({ events, refetch }) => {
   const columns = [
     {
       title: 'Название',
@@ -49,7 +49,7 @@ const EventsTable = ({ events }) => {
       title: 'Действие',
       key: 'action',
       render: (text, record) => (
-        <EventEdit event={record} />
+        <EventEdit event={record} refetch={refetch} />
       ),
     },
   ];

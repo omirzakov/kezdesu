@@ -1,63 +1,65 @@
 import React from "react";
 
 import { Table, Tag, Space } from 'antd';
+import { useGetCategoryQuery } from "../../app/api/category";
+import FullLoader from "../../views/FullLoader";
+import { useGetCityQuery } from "../../app/api/city";
 import CitiesEdit from "./СitiesEdit";
+import CitiesCreate from "./CitiesCreate";
 
-const columns = [
+
+const renderColumns = (refetch) => {
+
+  return [
+    {
+      title: 'Идентификатор города',
+      dataIndex: 'cityId',
+      key: 'cityId',
+    },
     {
       title: 'Название',
       dataIndex: 'label',
       key: 'label',
-      render: text => <a>{text}</a>,
     },
     {
-      title: 'ID',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Широта',
+      dataIndex: 'latitude',
+      key: 'latitude',
+    },
+    {
+      title: 'Долгота',
+      dataIndex: 'longitude',
+      key: 'longitude',
     },
     {
       title: 'Актуальный',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'actual',
+      key: 'actual',
+      render: actual => <span>{actual ? "Да" : "Нет"}</span>,
     },
     {
-      title: 'Действие',
-      key: 'action',
-      render: (text, record) => (
-          <CitiesEdit />
-      ),
+      title: 'Актуальный',
+      dataIndex: 'actual',
+      key: 'actual',
+      render: (actual, record) => <CitiesEdit refetch={refetch} record={record} />,
     },
   ];
-  
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
+}
 
 const CitiesTable = () => {
+  const { data, isLoading, refetch } = useGetCityQuery();
 
 
-    return (
-        <Table columns={columns} dataSource={data} />
-    )
+  if (isLoading) {
+    return <FullLoader />
+  }
+
+
+  return (
+    <>
+      <CitiesCreate refetch={refetch} />
+      <Table columns={renderColumns(refetch)} dataSource={data?.detailResponses} />
+    </>
+  )
 }
 export default CitiesTable;
