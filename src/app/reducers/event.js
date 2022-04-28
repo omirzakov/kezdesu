@@ -11,8 +11,10 @@ const event = createSlice({
     },
     extraReducers: builder => {
         builder.addMatcher(eventApi.endpoints.getEvent.matchFulfilled, (state, { payload }) => {
-            const { events } = payload;
-            state.data = events;
+            console.log(payload)
+
+            const { eventResponses } = payload;
+            state.data = eventResponses;
         })
     }
 });

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { useCreateEventMutation } from '../../app/api/event';
+import { DatePicker, Space } from 'antd';
+
+const { RangePicker } = DatePicker;
+
 
 const EventCreate = ({ refetch }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -20,6 +24,8 @@ const EventCreate = ({ refetch }) => {
     };
 
     const onFinish = (values) => {
+        console.log(values)
+
         const data = {
             ...values,
             "startedAt":"2012-04-23T20:25:43.511Z",
@@ -56,6 +62,13 @@ const EventCreate = ({ refetch }) => {
                         rules={[{ required: true, message: 'Причина' }]}
                     >
                         <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Дата начало"
+                        name="started_at"
+                        rules={[{ required: true, message: 'Причина' }]}
+                    >
+                        <DatePicker format="YYYY-MM-DD HH:mm" showTime />
                     </Form.Item>
                     <Form.Item
                         label="Широта"
