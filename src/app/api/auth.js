@@ -26,8 +26,17 @@ export const authApi = api.injectEndpoints({
                     url: '/action/get-account',
                 }
             }
+        }),
+        editAccout: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/action/edit-account',
+                    method: 'POST',
+                    body: data
+                }
+            }
         })
     })
 })
 
-export const { useAuthMutation, useResetPasswordMutation, useGetAccountQuery } = authApi;
+export const { useAuthMutation, useResetPasswordMutation, useGetAccountQuery, useEditAccoutMutation } = authApi;

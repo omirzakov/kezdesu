@@ -3,6 +3,7 @@ import { Modal, Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { useCreateEventMutation } from '../../app/api/event';
 import { DatePicker, Space } from 'antd';
+import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
@@ -24,13 +25,13 @@ const EventCreate = ({ refetch }) => {
     };
 
     const onFinish = (values) => {
-        console.log(values)
+        console.log(moment(values.started_at).toISOString());
 
         const data = {
             ...values,
-            "startedAt":"2012-04-23T20:25:43.511Z",
-            "endedAt":"2012-04-23T21:25:43.511Z",
-            "creatorId":"456asfadsf3f4s"
+            "startedAt": moment(values.started_at).toISOString(),
+            "endedAt": moment(values.ended_at).toISOString(),
+            "creatorId": "456asfadsf3f4s"
         }
         fetchCreateEvent(data);
         refetch();
@@ -38,7 +39,7 @@ const EventCreate = ({ refetch }) => {
     }
 
     useEffect(() => {
-        if(isSuccess) {
+        if (isSuccess) {
             refetch();
         }
     }, [isSuccess])
@@ -63,13 +64,23 @@ const EventCreate = ({ refetch }) => {
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item
-                        label="Дата начало"
-                        name="started_at"
-                        rules={[{ required: true, message: 'Причина' }]}
-                    >
-                        <DatePicker format="YYYY-MM-DD HH:mm" showTime />
-                    </Form.Item>
+                    <Space>
+                        <Form.Item
+                            label="Дата начало"
+                            name="started_at"
+                            rules={[{ required: true, message: 'Причина' }]}
+                        >
+                            <DatePicker placeholder='Дата начало' format="YYYY-MM-DD HH:mm" showTime />
+                        </Form.Item>
+                        <Form.Item
+                            label="Дата конца"
+                            name="ended_at"
+
+                            rules={[{ required: true, message: 'Причина' }]}
+                        >
+                            <DatePicker placeholder='Дата конца' format="YYYY-MM-DD HH:mm" showTime />
+                        </Form.Item>
+                    </Space>
                     <Form.Item
                         label="Широта"
                         name="latitude"
