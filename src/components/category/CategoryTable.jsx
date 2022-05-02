@@ -27,6 +27,29 @@ const renderColumns = (refetch) => {
       render: actual => <span>{actual ? "Да" : "Нет"}</span>,
     },
     {
+      title: 'Цвет',
+      dataIndex: 'color',
+      key: 'color',
+      render: (text) =>             <div
+      style={{
+        width: "45px",
+        height: "45px",
+        marginTop: 20,
+        borderRadius: "100%",
+        border: "1px solid black",
+        backgroundColor: text,
+      }}
+    >
+      {" "}
+    </div>
+    },
+    {
+      title: 'Фото',
+      dataIndex: 'img',
+      key: 'img',
+      render: (img) => <img src={img} alt='img' height={75} width={75} />
+    },
+    {
       title: 'Актуальный',
       key: 'actual',
       render: (text, record) => <CategoryEdit refetch={refetch} record={record} />,

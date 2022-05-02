@@ -43,11 +43,11 @@ export const navigatons = [
     //     link: "/role",
     //     Icon: SkinOutlined
     // },
-    {
-        name: "Статистика",
-        link: "/statistics",
-        Icon: LineChartOutlined
-    },
+    // {
+    //     name: "Статистика",
+    //     link: "/statistics",
+    //     Icon: LineChartOutlined
+    // },
     // {
     //     name: "Чат",
     //     link: "/chat",
