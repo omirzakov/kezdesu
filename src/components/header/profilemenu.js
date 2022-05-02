@@ -3,14 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 const onClick = ({ key }) => {
 
-  console.log('clicked', key)
-
   if(key === 'exit') {
     localStorage.removeItem('token');
     window.location.reload()
-  }
-  else {
-    navigate(key);
   }
 };
 

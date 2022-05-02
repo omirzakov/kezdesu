@@ -43,8 +43,6 @@ const EventCreate = ({ refetch }) => {
   const initialMarkers = [new LatLng(51.505, -0.09)];
   const [markers, setMarkers] = useState(initialMarkers);
 
-    markers
-
   const showModal = () => {
     setIsModalVisible(true);
   };
