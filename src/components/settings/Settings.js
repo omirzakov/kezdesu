@@ -31,6 +31,7 @@ const Settings = () => {
 
         fetchChangeData(data);
         refetch();
+        window.location.reload();
     }
 
     return (

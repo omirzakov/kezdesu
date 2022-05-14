@@ -1,7 +1,8 @@
 import { Menu } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const onClick = ({ key }) => {
-  
+
   if(key === 'exit') {
     localStorage.removeItem('token');
     window.location.reload()
@@ -10,9 +11,10 @@ const onClick = ({ key }) => {
 
 
 const profileMenu = (
+  
     <Menu onClick={onClick}>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer">
+      {/* <Menu.Item key='/profile'>
+        <a target="/settings" rel="noopener noreferrer">
           Профиль
         </a>
       </Menu.Item>
@@ -20,7 +22,7 @@ const profileMenu = (
         <a target="_blank" rel="noopener noreferrer" >
           Настройка
         </a>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item key='exit'>
         <div>
           Выйти

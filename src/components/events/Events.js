@@ -5,8 +5,9 @@ import { useGetEventQuery } from "../../app/api/event";
 import { useSelector } from "react-redux";
 import FullLoader from "../../views/FullLoader";
 import EventCreate from "./EventCreate";
+import 'leaflet/dist/leaflet.css'
 
-
+const position = [51.505, -0.09];
 const { Title } = Typography;
 
 const Events = () => {
