@@ -2,7 +2,7 @@ version: '3'
 services:
   admin-client:
     container_name: admin-client
-    image: 4652427e9e54
+    image: a7cb4680d757
     ports: 
       - "5000:5000"
     networks:

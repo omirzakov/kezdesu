@@ -26,7 +26,19 @@ export const userApi = api.injectEndpoints({
                 }
             }
         }),
+        unblockClient: builder.mutation({
+            query: ({ id }) => {
+
+                return {
+                    url: '/action/unblock-client',
+                    method: 'POST',
+                    body: {
+                        id
+                    }
+                }
+            }
+        })
     })
 })
 
-export const { useGetUsersQuery, useBlockUserMutation, useGetBlockUsersQuery } = userApi;
+export const { useGetUsersQuery, useBlockUserMutation, useGetBlockUsersQuery, useUnblockClientMutation } = userApi;

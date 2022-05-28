@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Table, Tag, Space, Button } from 'antd';
+import { useGetBlockUsersQuery, useUnblockClientMutation } from "../../app/api/user";
 
-const columns = [
+
+const BlackListTable = () => {
+  const { data, refetch } = useGetBlockUsersQuery();
+  const [fetchUnlbockClient, { isLoading, isSuccess }] = useUnblockClientMutation();
+
+  const unBlock = (value) => {
+    fetchUnlbockClient({ id: value?.clientId });
+  }
+
+  useEffect(() => {
+    if(isSuccess) {
+      refetch();
+    }
+  }, [isSuccess])
+
+  const columns = [
     {
       title: 'Телефон',
       dataIndex: 'phone',
@@ -33,15 +49,10 @@ const columns = [
       key: 'action',
       render: blocked => {
         console.log(blocked)
-        return <Button type="primary">Разблокировать</Button>
+        return <Button loading={isLoading} type="primary" onClick={() => unBlock(blocked)}>Разблокировать</Button>
       },
     },
   ];
-
-
-const BlackListTable = ({ data }) => {
-
-  console.log(data)
 
 
     return (
