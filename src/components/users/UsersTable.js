@@ -2,8 +2,13 @@ import React from "react";
 
 import { Table, Tag, Space } from 'antd';
 import UsersEdit from "./UsersEdit";
+import { useGetUsersQuery } from "../../app/api/user";
 
-const columns = [
+
+const UsersTable = () => {
+  const { data, refetch } = useGetUsersQuery(null, { refetchOnMountOrArgChange: true });
+
+  const columns = [
     {
       title: 'Телефон',
       dataIndex: 'phone',
@@ -30,19 +35,14 @@ const columns = [
       title: 'Действие',
       key: 'action',
       render: (text, record) => (
-        <UsersEdit user={record} />
+        <UsersEdit user={record} refetch={refetch} />
       ),
     },
   ];
 
 
-const UsersTable = ({ data }) => {
-
-  console.log(data)
-
-
-    return (
-        <Table columns={columns} dataSource={data?.clients} />
-    )
+  return (
+    <Table columns={columns} dataSource={data?.clients} />
+  )
 }
 export default UsersTable;

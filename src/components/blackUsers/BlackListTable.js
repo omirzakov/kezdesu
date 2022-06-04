@@ -5,7 +5,7 @@ import { useGetBlockUsersQuery, useUnblockClientMutation } from "../../app/api/u
 
 
 const BlackListTable = () => {
-  const { data, refetch } = useGetBlockUsersQuery();
+  const { data, refetch } = useGetBlockUsersQuery(null, { refetchOnMountOrArgChange: true });
   const [fetchUnlbockClient, { isLoading, isSuccess }] = useUnblockClientMutation();
 
   const unBlock = (value) => {

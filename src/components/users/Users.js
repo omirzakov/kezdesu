@@ -9,13 +9,10 @@ import { useGetAccountQuery } from "../../app/api/auth";
 const { Title } = Typography;
 
 const Users = () => {
-    const { data } = useGetUsersQuery();
-
-
     return (
         <div>
             <Title level={2}>Пользователи</Title>
-            <UsersTable data={data} />
+            <UsersTable />
         </div>
     )
 }

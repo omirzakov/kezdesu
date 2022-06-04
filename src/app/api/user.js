@@ -37,8 +37,16 @@ export const userApi = api.injectEndpoints({
                     }
                 }
             }
-        })
+        }),
+        reports: builder.query({
+            query: () => {
+
+                return {
+                    url: '/action/list-complain',
+                }
+            }
+        }),
     })
 })
 
-export const { useGetUsersQuery, useBlockUserMutation, useGetBlockUsersQuery, useUnblockClientMutation } = userApi;
+export const { useGetUsersQuery, useBlockUserMutation, useGetBlockUsersQuery, useUnblockClientMutation, useReportsQuery } = userApi;

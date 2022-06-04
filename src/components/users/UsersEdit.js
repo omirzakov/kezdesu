@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { useBlockUserMutation } from '../../app/api/user';
 
-const UsersEdit = ({ user }) => {
-    console.log(user)
+const UsersEdit = ({ user, refetch }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [form] = Form.useForm();
-    const [fetchBlockUser] = useBlockUserMutation();
+    const [fetchBlockUser, { isSuccess }] = useBlockUserMutation();
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -26,6 +25,12 @@ const UsersEdit = ({ user }) => {
         fetchBlockUser({ id: user?.clientId, blockReason: values?.reason });
         setIsModalVisible(false);
     }
+
+    useEffect(() => {
+        if(isSuccess) {
+            refetch();
+        }
+    }, [isSuccess])
 
     return (
         <>

@@ -24,7 +24,7 @@ const Main = () => {
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed} width={300}>
                 <div style={{ color: "white", padding: 10 }}>KEZDESU</div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{ minHeight: "100vh" }}>
+                <Menu theme="dark" mode="inline" style={{ minHeight: "100vh" }}>
                     {
                         navigatons?.map((nav, i) => (
                             <Menu.Item key={i} icon={<nav.Icon />} >
