@@ -2,52 +2,49 @@ import React from "react";
 
 import { Table } from 'antd';
 import { useReportsQuery } from "../../app/api/user";
-
-
-const renderColumns = (refetch) => {
-
-  return [
-    {
-      title: 'Идентификатор города',
-      dataIndex: 'cityId',
-      key: 'cityId',
-    },
-    {
-      title: 'Название',
-      dataIndex: 'label',
-      key: 'label',
-    },
-    {
-      title: 'Широта',
-      dataIndex: 'latitude',
-      key: 'latitude',
-    },
-    {
-      title: 'Долгота',
-      dataIndex: 'longitude',
-      key: 'longitude',
-    },
-    {
-      title: 'Актуальный',
-      dataIndex: 'actual',
-      key: 'actual',
-      render: actual => <span>{actual ? "Да" : "Нет"}</span>,
-    },
-    {
-      title: 'Актуальный',
-      dataIndex: 'actual',
-      key: 'actual',
-    },
-  ];
-}
+import FullLoader from "../../views/FullLoader";
+import EventEdit from "../events/EventEdit";
 
 const ReportTable = () => {
- useReportsQuery();
- let refetch = null;
+ const { data, isLoading, refetch } = useReportsQuery();
+
+  if(isLoading) {
+    return <FullLoader />;
+  }
+
+  const columns = [
+    {
+      title: 'ID жалобы',
+      dataIndex: 'complainId',
+      key: 'complainId',
+    },
+    {
+      title: 'Номер телефона',
+      dataIndex: 'clientPhone',
+      key: 'clientPhone',
+    },
+    {
+      title: 'Причина',
+      dataIndex: 'complainText',
+      key: 'complainText',
+    },
+    {
+      title: 'Название ивента',
+      dataIndex: 'eventName',
+      key: 'eventName',
+    },
+    {
+      title: 'Действие',
+      key: 'action',
+      render: (text, record) => (
+        <EventEdit event={record} refetch={refetch} />
+      ),
+    },
+  ];
 
   return (
     <>
-      <Table columns={renderColumns(refetch)} dataSource={[]} />
+      <Table columns={columns} dataSource={data?.detailResponses || []} />
     </>
   )
 }
